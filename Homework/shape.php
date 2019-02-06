@@ -1,5 +1,6 @@
 <script type="text/javascript">
 function formulas(shape) {
+    // Display div containing additional input for area calculation
     console.log(shape.value);
     if (shape.value) {
         document.getElementById(shape.value).style.display = "block";
@@ -70,7 +71,7 @@ function formulas(shape) {
 <hr>
 
 <?php
-var_dump($_POST);
+// var_dump($_POST);
 $shape = $_POST["shape"];
 $H = $_POST["height"];
 $L = $_POST["length"];
@@ -78,27 +79,26 @@ $R = $_POST["radius"];
 $B1 = $_POST["base1"];
 $B2 = $_POST["base2"];
 $S = $_POST["side"];
-
 $area;
 
 switch ($shape) {
     case 'Trapezoid':
-        // code...
+        $area = ( ($B1 + $B2) / 2 ) * $H;
         break;
     case 'Cone':
-        // code...
+        $area = pi() * $R * ( $R + sqrt($H * $H + $R * $R) );
         break;
     case 'Square':
-        // code...
+        $area = pow($S,2);
         break;
     case 'Circle':
-        $area = pi() * $R * $R;
+        $area = pi() * pow($R,2);
         break;
     case 'Rectangle':
         $area = $H * $L;
         break;
     case 'Cylinder':
-        // code...
+        $area = (2 * pi() * $R * $H )+ (2 * pi() * $R * $R);
         break;
     case 'Triangle':
         $area = ($H * $L) / 2;
