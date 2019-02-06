@@ -6,6 +6,20 @@ function formulas(shape) {
     } else {
         document.getElementById(shape.value).style.display = "none";
     }
+
+    // Disable input elements of divs containing shape formulas not selected
+    var divs = document.getElementsByTagName('div');
+    var div, j=0;
+    while (div=divs[j++]) {
+        if (div.id != shape.value) {
+            var inputs = div.getElementsByTagName('input');
+            console.log(inputs);
+            var inp, i=0;
+            while(inp=inputs[i++]) {
+                inp.disabled=true;
+            }
+        }
+    }
 }
 </script>
 
