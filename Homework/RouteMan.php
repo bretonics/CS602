@@ -1,5 +1,3 @@
-
-
 <?php
 
 // Request headers
@@ -55,15 +53,15 @@ switch($method) {
             $id = $match[1];
             $data = updateReview($data, $id);
             echo $data;  // JSON
-            // Write new file and redirect to page with updated review
-            file_put_contents($fileName, $data);
             header("Location: ./RouteMan.php$path");
-            break;
+            // break;
         } else {
             // creates a new review (/review);
-            echo( addReview($data) );
+            $data = addReview($data);
+            echo $data;
         }
-
+        // Write new file and redirect to page with updated review
+        file_put_contents($fileName, $data);
         break;
 
     case "DELETE":
@@ -118,7 +116,7 @@ function addReview($reviews) {
                         );
     // Add new review and return all reviews
     $new[] = $newReview;
-    return json_encode($new);
+    return json_encode($new, JSON_PRETTY_PRINT);
 }
 
 // Update a review

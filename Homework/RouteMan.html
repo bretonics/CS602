@@ -42,7 +42,7 @@
 
         <!-- All Reviews Container -->
         <div class="container-fluid" id="reviews" style="display:none;">
-            <form action="RouteMan.php/review" method="get" name="reviews">
+            <form action="RouteMan.php/review" method="get" name="reviews" target="_blank">
                 <h4>Submit to get all reviews</h4>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -52,11 +52,9 @@
         <!-- See Specific Container -->
         <div class="container-fluid" id="see" style="display:none;">
             <h4>Select a review by ID:</h4>
-            <form action="" method="get" onchange="window.location.href='RouteMan.php/review/' + id.value;">
+            <form action="" method="get">
                 <div class="form-group">
-                    <input type="number" class="form-control" name="id" placeholder="ID">
-                    <br>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <input type="number" class="form-control" name="id" placeholder="ID" onchange="window.location.href='RouteMan.php/review/' + this.value;">
                 </div>
             </form>
         </div>
@@ -65,7 +63,7 @@
         <!-- Create New Review -->
         <div class="container-fluid" id="create" style="display:none;">
             <h4>Create a new review:</h4>
-            <form action="RouteMan.php/review" method="post">
+            <form action="RouteMan.php/review" method="post" target="_blank">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" placeholder="Name">
@@ -90,7 +88,7 @@
         <!-- Edit Review Container -->
         <div class="container-fluid" id="edit" style="display:none;">
             <h4>Edit review by ID entered:</h4>
-            <form action="RouteMan.php" method="post">
+            <form action="RouteMan.php" method="post" target="_blank">
                 <div class="form-group">
                     <label for="route_id">ID</label>
                     <input type="text" class="form-control" name="route_id" placeholder="ID">
@@ -119,14 +117,15 @@
         <!-- Delete review Container -->
         <div class="container-fluid" id="delete" style="display:none;">
             <h4>Enter review ID to delete: </h4>
-            <form action="RouteMan.php/review" method="delete">
+            <form action="RouteMan.php" method="delete">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="route_id" placeholder="ID">
+                    <input type="number" class="form-control" name="route_id" placeholder="ID">
                 </div>
+                <p>HTML5 forms does not support DELETE method? <strong>Works in Postman.</strong></p>
+                <button type="submit" class="btn btn-primary" disabled>Submit</button>
             </form>
         </div>
 
     </div>
-<!-- onsubmit="window.location.href='RouteMan.php/review/' + route_id.value;" -->
 </body>
 </html>
