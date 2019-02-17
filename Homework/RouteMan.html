@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>RouteMan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<script type="text/javascript">
+    function display(form) {
+        // Display proper form
+        console.log(form.value);
+        if (form.value) {
+            document.getElementById(form.value).style.display = "block";
+        } else {
+            document.getElementById(form.value).style.display = "none";
+        }
+    }
+
+    function redirect(id) {
+        let page = window.location.href='./RouteMan.php/review/' + id;
+        console.log(page);
+        return false;
+    }
+
+</script>
+<body>
+    <!-- Main Options Container -->
+    <div class="container-fluid">
+        <br>
+        <div class="container">
+            <select class="custom-select" id="action" onchange="display(action)">
+                <option selected>Select Action</option>
+                <option value="reviews">Get Reviews</option>
+                <option value="see">See Review</option>
+                <option value="create">Create Review</option>
+                <option value="edit">Edit Review</option>
+                <option value="delete">Delete Review</option>
+            </select>
+        </div>
+        <br><br>
+
+        <!-- All Reviews Container -->
+        <div class="container-fluid" id="reviews" style="display:none;">
+            <form action="RouteMan.php/review" method="get" name="reviews">
+                <h4>Submit to get all reviews</h4>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <br><br>
+
+        <!-- See Specific Container -->
+        <div class="container-fluid" id="see" style="display:none;">
+            <h4>Select a review by ID:</h4>
+            <form action="" method="get" onchange="window.location.href='RouteMan.php/review/' + id.value;">
+                <div class="form-group">
+                    <input type="number" class="form-control" name="id" placeholder="ID">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <br><br>
+
+        <!-- Create New Review -->
+        <div class="container-fluid" id="create" style="display:none;">
+            <h4>Create a new review:</h4>
+            <form action="RouteMan.php/review" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" name="location" placeholder="Location">
+                </div>
+                <div class="form-group">
+                    <label for="caption">Caption</label>
+                    <input type="text" class="form-control" name="caption" placeholder="Caption">
+                </div>
+                <div class="form-group">
+                    <label for="review">Review</label>
+                    <input type="text" class="form-control" name="review" placeholder="Review">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <br>
+        </div>
+
+        <!-- Edit Review Container -->
+        <div class="container-fluid" id="edit" style="display:none;">
+            <h4>Edit review by ID entered:</h4>
+            <form action="RouteMan.php" method="post">
+                <div class="form-group">
+                    <label for="route_id">ID</label>
+                    <input type="text" class="form-control" name="route_id" placeholder="ID">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" name="location" placeholder="Location">
+                </div>
+                <div class="form-group">
+                    <label for="caption">Caption</label>
+                    <input type="text" class="form-control" name="caption" placeholder="Caption">
+                </div>
+                <div class="form-group">
+                    <label for="review">Review</label>
+                    <input type="text" class="form-control" name="review" placeholder="Review">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <br>
+        </div>
+
+        <!-- Delete review Container -->
+        <div class="container-fluid" id="delete" style="display:none;">
+            <h4>Enter review ID to delete: </h4>
+            <form action="RouteMan.php/review" method="delete">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="route_id" placeholder="ID">
+                </div>
+            </form>
+        </div>
+
+    </div>
+<!-- onsubmit="window.location.href='RouteMan.php/review/' + route_id.value;" -->
+</body>
+</html>
