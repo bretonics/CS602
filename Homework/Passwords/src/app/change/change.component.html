@@ -3,16 +3,16 @@
     <!-- <hr style="background-color:#ffffff"> -->
     <br>
 
-    <form class="text-white" action="http://localhost:3002/password/change" method="post">
+    <form class="text-white" method="post">
         <div class="form-group">
-          <input type="number" name="id" id="id" class="form-control" placeholder="id" aria-describedby="helpId">
+          <input type="number" [(ngModel)]="id" name="id" id="id" class="form-control" placeholder="id" aria-describedby="helpId">
           <small id="helpId" class="text-muted">Unique ID of password to be changed.</small>
         </div>
         <div class="form-group">
-            <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="New password">
+            <input type="password" [(ngModel)]="newpassword" name="newpassword" id="newpassword" class="form-control" placeholder="New password">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button (click)="changePassword(id, newpassword)" type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
 </div>

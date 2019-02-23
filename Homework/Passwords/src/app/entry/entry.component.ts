@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VaultService } from "../vault.service";
-import { Observable, Subject } from "rxjs";
 
 @Component({
   selector: 'app-entry',
@@ -16,8 +15,8 @@ export class EntryComponent implements OnInit {
 
   constructor(private vault: VaultService) { }
   
-  // Hit back end -- Store passwords in vault  
-  storePassword(source: string, name: string, password: string) {
+  // Vault Services -- Store passwords in vault  
+  storePassword(source, name, password) {
     this.vault.storePassword(source, name, password).subscribe( result => {
         this.passwords = result.data;
     });

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VaultService } from "../vault.service";
 
 @Component({
   selector: 'app-change',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangeComponent implements OnInit {
 
-  constructor() { }
+  id: number;
+  newpassword: string;
+  added: any;
+
+  constructor(private vault: VaultService) { }
+
+  //  Vault Services -- Change password in vault
+  changePassword(id, newpassword) {
+    this.vault.changePassword(id, newpassword).subscribe(result => {
+      this.added = result.data;
+    });
+  }
 
   ngOnInit() {
   }
