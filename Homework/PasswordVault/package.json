@@ -1,7 +1,7 @@
 {
   "name": "passwordvault",
   "version": "1.0.0",
-  "description": "Currently stored passwords",
+  "description": "Password Vault Services",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

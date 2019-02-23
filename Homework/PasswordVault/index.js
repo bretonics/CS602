@@ -66,6 +66,20 @@ app.post('/passwords/add', (req, res) => {
 // Change password
 app.post('/passwords/change', (req, res) => {
     const { id, newpassword } = req.body;
+    let login = getLogin(req, id);
+    console.log("RETURNED\n", login);
+    // Replace login with new password
+    if (login) {
+        console.log(`Changing password for ${id} to ${newpassword}`);
+        let index = req.session.passwords.indexOf(login);
+        login.password = newpassword;
+        req.session.passwords[index] = login;
+    } else {
+        console.log(`Sorry! No login found with id \`${id}\``);
+    }
+
+    // Return updated login
+    res.json(login);
 });
 
 
@@ -99,4 +113,12 @@ function getIDs(req) {
         ids.push(login.id);
     });
     return ids;
+}
+
+function getLogin(req, id) {
+    let entry = null;
+    req.session.passwords.forEach( (login) => {
+        if (login.id == id) { entry = login; } 
+    });
+    return entry;
 }
