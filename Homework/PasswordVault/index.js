@@ -5,21 +5,27 @@ const bodyParser = require('body-parser');
 
 const port = 3002;
 const session = {
-    secret: "hellowwww",
+    // This is the secret used to sign the session ID cookie
+    secret: "manthiscookieisdelishhMONSTAAAH",
+    // Forces the session to be saved back to the session store, even if the session was never modified during the request
     resave: false,
+    // Forces a session that is “uninitialized” to be saved to the store
     saveUninitialized: true,
+    // would require https:// on localhost
     cookie: { secure: false },
 }
+
 var corsOptions = {
     origin: 'http://localhost:4200',
     methods: ['GET', 'PUT', 'POST'],
 }
+
 // Initialize app and use attributes
 var app = express();
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));   // parse request body content
 app.use(expressSession(session));
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Setup session to hold passwords
 app.all('*', (req, res, next) => {
@@ -31,22 +37,25 @@ app.all('*', (req, res, next) => {
 // Get all passwords
 app.get('/passwords', (req, res) => {
     // return all passwords in vault
+    console.log("Retriving all passwords...");
     res.json(req.session.passwords);
 });
 
 // Add new password to vault
 app.post('/passwords/add', (req, res) => {
     let id = generateID(req);
-    const { source, password } = req.body;
-    console.log(source, password);
+    const { source, password, name } = req.body;
+    // console.log(source, name, password);
 
     // create login object from password information entered
     const login = { 'source': source,
+                    'name': name,
                     'password': password,
                     'id': id,
                     }
 
     // add password entered to vault
+    console.log("Saving: ", login);
     req.session.passwords.push(login);
 
     // return login entered
@@ -56,11 +65,15 @@ app.post('/passwords/add', (req, res) => {
 
 // Change password
 app.post('/passwords/change', (req, res) => {
-
+    const { id, newpassword } = req.body;
 });
 
 
-app.listen(port, () => console.log(`Passwords Vault Services listening on port ${port}!`));
+app.listen(port, () => {
+    console.log(`Passwords Vault Services listening on port ${port}!`)
+    console.log("Session:", JSON.stringify(session))
+    }
+);
 
 
 //--------------------------------------------------------------------------------
