@@ -32,6 +32,11 @@ export class VaultService {
     let url: string = `${this.url}passwords/change`;
     return this.http.post(url, { id, newpassword }, this.httpOptions );
   }
+  
+  deletePassword(id: number): Observable<any> {
+    let url: string = `${this.url}passwords/delete/${id}`;
+    return this.http.delete(url, this.httpOptions );
+  }
 
 
 }

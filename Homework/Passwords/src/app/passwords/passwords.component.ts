@@ -8,6 +8,8 @@ import { VaultService } from "../vault.service";
 })
 export class PasswordsComponent implements OnInit {
 
+  result: any;
+  message: string;
   passwords: any[];
 
   constructor(private vault: VaultService) { }
@@ -21,8 +23,19 @@ export class PasswordsComponent implements OnInit {
   }
 
   deletePassword(id: number){
-    console.log("Deleting password: ", id);
-    
+    let alert = confirm(`Are you sure you want to delete password: ${id}?`);
+    // Confirm password deletion
+    if (alert) {
+      console.log("Deleting password: ", id);
+      this.vault.deletePassword(id).subscribe( (result) => {
+        // If APi call returned properly
+        if (result) {
+          this.passwords = result;
+          this.message = "Successfully deleted " + id;
+        }
+      });
+    }
+
   }
   
   ngOnInit() {

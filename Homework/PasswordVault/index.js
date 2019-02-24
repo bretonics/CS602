@@ -17,7 +17,7 @@ const session = {
 
 var corsOptions = {
     origin: 'http://localhost:4200',
-    methods: ['GET', 'PUT', 'POST'],
+    methods: ['GET', 'PUT', 'POST', 'DELETE'],
     credentials: true,  // !important for Angular cookie sending
 }
 
@@ -94,6 +94,19 @@ app.post('/passwords/change', (req, res) => {
     res.json(login);
 });
 
+// DELETE password
+app.delete('/passwords/delete/:id', (req, res) => {
+    // const { id } = req.body;
+    const id = req.params.id;
+    console.log("Deleting password: ", id);
+    let login = getLogin(req, id);
+
+    // Remove login entry from vault
+    let index = req.session.passwords.indexOf(login);
+    req.session.passwords.splice(index,1);
+    res.json(req.session.passwords);
+
+});
 
 app.listen(port, () => {
     console.log(`Passwords Vault Services listening on port ${port}!`)
