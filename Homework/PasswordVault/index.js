@@ -16,7 +16,7 @@ const session = {
 }
 
 var corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200', 'http://localhost:8888'],
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     credentials: true,  // !important for Angular cookie sending
 }
