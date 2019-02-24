@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VaultService } from "../vault.service";
 
 @Component({
   selector: 'app-passwords',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordsComponent implements OnInit {
 
-  constructor() { }
+  passwords: any[];
 
+  constructor(private vault: VaultService) { }
+
+  //  Vault Services -- Get all passwords API
+  allPasswords() {
+    console.log("Calling vault services...");
+    this.vault.allPasswords().subscribe( (result: any[]) => {
+      this.passwords = result;
+    });
+  }
+
+  deletePassword(id: number){
+    console.log("Deleting password: ", id);
+    
+  }
+  
   ngOnInit() {
+    this.allPasswords();
   }
 
 }

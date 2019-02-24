@@ -28,12 +28,6 @@ app.use(expressSession(session));
 app.use(express.json());
 app.use(cors(corsOptions));
 
-// Express session endpoint
-app.get('/session', function (req, res) {
-    console.log(`Session ID: ${req.session.id}`);
-    res.status(200).json({ sessionid: req.session.id });
-});
-
 // Setup session to hold passwords
 app.all('*', (req, res, next) => {
     let passwords = req.session.passwords || [];
@@ -44,16 +38,21 @@ app.all('*', (req, res, next) => {
 // No root access
 app.get('/', (req, res) => res.send('You are not allowed.'));
 
+// Express session endpoint
+app.get('/session', function (req, res) {
+    // console.log(`Session ID: ${req.session.id}`);
+    // res.status(200).json({ sessionid: req.session.id });
+});
+
 // Get all passwords
 app.get('/passwords', (req, res) => {
     // return all passwords in vault
-    console.log("Retriving all passwords...\n", req.session.passwords, "\n\n");
+    console.log("\nRetriving all passwords...\n\n", req.session.passwords);
     res.json(req.session.passwords);
 });
 
 // Add new password to vault
 app.post('/passwords/add', (req, res) => {
-    console.log("REQ:\n", req);
     let id = generateID(req);
     const { source, password, name } = req.body;
 
@@ -62,11 +61,11 @@ app.post('/passwords/add', (req, res) => {
                     'name': name,
                     'password': password,
                     'id': id,
+                    'history': [],
                     }
 
     // Add password entered to vault
-    console.log("Saving new entry to vault.\n", login);
-    console.log("Current passwords:\n", req.session.passwords);
+    console.log("Saving new entry to vault.\n");
     req.session.passwords.push(login);
 
     // return login entered
@@ -76,16 +75,16 @@ app.post('/passwords/add', (req, res) => {
 
 // Change password
 app.post('/passwords/change', (req, res) => {
-    console.log(`Session ID: ${req.session.id}`);
     const { id, newpassword } = req.body;
     let login = getLogin(req, id);
 
     // Replace login with new password
     if (login) {
-        console.log(`Changing password for ${id}`);
+        console.log(`Changing password for ${id}. Previous password stored.`);
         let index = req.session.passwords.indexOf(login);
-        login.password = newpassword;
-        req.session.passwords[index] = login;
+        login.history.push(login.password);  // save previous password
+        login.password = newpassword;  // change current password
+        req.session.passwords[index] = login;  // replace new login in vault
     } else {
         console.log(`Sorry! No login found with id \`${id}\``);
     }

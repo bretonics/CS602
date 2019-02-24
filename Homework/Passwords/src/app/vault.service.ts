@@ -18,6 +18,11 @@ export class VaultService {
   constructor(private http: HttpClient) { }
 
   // Password Vault API
+  allPasswords(): Observable<any> {
+    let url: string = `${this.url}passwords`;
+    return this.http.get(url, this.httpOptions );
+  }
+
   storePassword(source: string, name: string, password: string): Observable<any> {
     let url: string = `${this.url}passwords/add`;
     return this.http.post(url, { source, name, password }, this.httpOptions);
