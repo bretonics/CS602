@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vacation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+</head>
+<script>
+    function save(dest) {
+        console.log(`Saving ${dest.value}`);
+        fetch('http://localhost:2000/api/vacation/destination', {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( {destination: dest.value} )
+        }).then( response => {
+            console.log(response);
+            
+        })
+    }
+
+    function getDestinations() {
+        console.log(`Getting destinations`);
+        fetch('http://localhost:2000/api/vacation/destination', {
+            method: 'get',
+        }).then(raw => {
+            return raw.json();
+        }).then(data => {
+            // document.getElementById('alert').style.display = "block";
+            document.getElementById('content').innerHTML = JSON.stringify(data);
+        }).catch(error => {
+            console.log(error.description);
+        });
+    }
+
+    function reset() {
+        console.log("Deleting file!");
+        fetch('http://localhost:2000/api/vacation/reset', {
+            method: 'get',
+        }).then(() => {
+            // document.getElementById('alert').style.display = "block";
+            document.getElementById('alert').innerHTML = "Vacation file has been deleted!";
+        }).catch(error => {
+            console.log(error.description);
+        });
+    }
+
+
+</script>
+<body>
+    <!-- Destination enter field -->
+    <section class="section">
+        <div class="field has-addons">
+            <div class="control is-large">
+                <input class="input" type="text" placeholder="Enter vacation destination" id="dest">
+            </div>
+            <div class="control">
+                <button onclick="save(dest)" class="button is-primary">
+                    Save
+                </button>
+            </div>
+        </div>
+    
+        <!-- Other action buttons -->
+        <div class="field is-grouped">
+            <div class="control">
+                <button onclick="getDestinations()" class="button is-info">Destinations</button>
+            </div>
+            <div class="control">
+                <button onclick="reset()" class="button is-danger">DELETE</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Container -->
+    <div class="container has-background-white" id="content">
+        <p></p>
+    </div>
+
+    <!-- Alert Container -->
+    <section id="alert" class="section has-text-white"></section>
+
+
+
+
+</body>
+</html>

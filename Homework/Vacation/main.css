@@ -1,0 +1,25 @@
+body {
+    background: url(./sunrise-1014712_1920.jpg) no-repeat;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+}
+
+#alert {
+    /* animation: disappear 2s 3s forwards; */
+    padding-top:10p;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+}
+
+@keyframes disappear {
+    to   { opacity: 0; }
+    to   { visibility: hidden; }
+}
+
+#content {
+    opacity: 0.5;
+}
