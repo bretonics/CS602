@@ -1,12 +1,12 @@
 const isDevMode = process.env.NODE_ENV !== 'production';
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 2000;
 
 const app = require("express")();
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const sessionConfig = {
     secret: 'asfhaosdhfoqewhfeorhwer',
-    cookie: {maaxAge: 60000},
+    cookie: {maxAge: 60000},
     resave: false,
     saveUninitialized: false,
 };

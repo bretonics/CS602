@@ -62,6 +62,7 @@ router.get('/reset', (req, res) => {
         if(err) throw err;
         console.log('File has been emptied!');
     });
+    res.send("Sucess");
 });
 
 
