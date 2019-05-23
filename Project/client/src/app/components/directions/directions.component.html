@@ -1,0 +1,27 @@
+<div class="container-fluid text-center">
+  <p>
+    <input type="text" [(ngModel)]="start" #to (keyup)="getDirections(to.value, from.value)">
+    &nbsp;
+    <input type="text" [(ngModel)]="destination" #from (keyup)="getDirections(to.value, from.value)">
+    &nbsp;
+    <button class="btn btn-success btn-sm" (click)="getDirections(start, destination)">Get Directions</button>
+  </p>
+  <!-- Directions -->
+  <div *ngIf="route" class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr align="center">
+          <th colspan="4">Distance: {{route.distance}} - Time: {{route.formattedTime}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let turn of route.legs[0].maneuvers; let i = index">
+          <td><img src={{turn.iconUrl}} alt="turn icon"></td>
+          <td>{{i + 1}}.</td>
+          <td><a href={{turn.mapUrl}} target="_blank">{{turn.narrative}}</a></td>
+          <td>{{turn.distance | number:'1.2-2'}}m</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div id="fiveday" class="container-fluid text-center" *ngIf="fiveday">
+    <div class="jumbotron" style="background:transparent !important">
+      <div class="container">
+        <h2 class="display-4">{{fiveday.Headline.Text}}</h2>
+        <p class="lead">Effective Date - {{ fiveday.Headline.EffectiveDate | date: mediumDate }}
+        <span class="badge badge-danger">Severity {{ fiveday.Headline.Severity }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Daily Forecasts -->
+    <div *ngFor="let day of daily; let i = index" style="display:inline-block;">
+        <div class="card text-center">
+          <div class="card-header">
+            {{ day.Date | date: mediumDate }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ day.Day.IconPhrase }}</h5>
+            <h4><i class="wi wi-day-{{ day.Day.IconPhrase | lowercase }}"></i></h4>
+          </div>
+          <div class="card-footer text-muted">
+            <p>Min {{ day.Temperature.Minimum.Value }}&#176; {{ day.Temperature.Minimum.Unit }}</p>
+            <p>Max {{ day.Temperature.Maximum.Value }}&#176; {{ day.Temperature.Minimum.Unit }}</p>
+          </div>
+        </div>
+    </div>
+
+</div>

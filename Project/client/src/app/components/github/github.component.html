@@ -1,0 +1,69 @@
+<!-- <div class="container">
+  <i class="fab fa-github fa-5x"></i>
+</div> -->
+
+<!-- Profile Card-->
+<div class="container-fluid" *ngIf="profile">
+    <!-- Card Image -->
+    <div class="card center text-center" style="width: 20rem;">
+        <a href="#"><img src="{{ profile.avatar_url }}" alt="Profile photo" width="100%" height="100%"></a>
+        <!-- Card Header -->
+        <div class="card-header">
+          <h4 class="card-title">{{ profile.name }}</h4>
+          <h5><a href="{{ profile.html_url }}" target="_blank"><i class="fab fa-github fa-2x"></i></a></h5>
+          <p class="card-subtitle mb-2">Developer</p>
+
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <p class="card-text">{{ profile.bio }}</p>
+          <!-- <a href="" class="btn btn-primary">Resume</a> -->
+        </div>
+        <!-- Card Group Items -->
+        <ul id="grouplist" class="list-group list-group-flush">
+            <div class="row">
+              <div class="col-sm-6">
+                <li class="list-group-item">
+                  <h5>Repos <a href="{{ profile.repos_url }}"><i class="fa fa-code-branch"></i></a> </h5>
+                  <span class="badge badge-pill badge-secondary">{{ profile.public_repos }}</span>
+                </li>
+              </div>
+              <div class="col-sm-6">
+                    <li class="list-group-item">
+                      <h5>Gists <a href="{{ profile.gists_url }}"><i class="fa fa-code"></i></a> </h5>
+                      <span class="badge badge-pill badge-secondary">{{ profile.public_gists }}</span>
+                    </li>
+              </div>
+            </div>
+          <!-- <li class="list-group-item">
+            <h5>LinkedIn <a href="https://www.linkedin.com/in/andresbreton" target="_blank"><i
+                  class="fab fa-linkedin"></i></a>
+            </h5>
+          </li> -->
+        </ul>
+    </div>
+</div>
+
+
+<!-- Repos -->
+<!-- <div class="container-fluid" *ngIf="repos">
+  <table class="table table-hover table-borderless">
+    <thead>
+      <tr align="center">
+        <th colspan="1">
+          <h2 class="display-5">{{profile.login | titlecase }} Repos <span
+              class="badge badge-pill badge-warning">{{repos.length}}</span></h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let repo of repos; let i = index" align="center">
+        <td *ngIf="repo.fork == false">
+          <button type="button" class="btn btn-dark" name="{{repo.name}}">
+            <a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->

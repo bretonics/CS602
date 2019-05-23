@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/weather-icons-master/css/weather-icons.min.css";
+
+.div {
+    margin: 25px;
+}
+
+.navbar {
+    margin-bottom: 15px;
+}
+
+.card {
+    margin: 5px;
+}
+
+.center {
+    position: inherit;
+    text-align: center;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.vertical-center {
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: space-evenly;
+}
