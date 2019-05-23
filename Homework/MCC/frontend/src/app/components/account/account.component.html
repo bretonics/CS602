@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <button type="button" name="open" id="open" class="btn btn-secondary float-right btn-lg" routerLink='open'>Open New Account</button>
+  <br>
+  <router-outlet></router-outlet>
+</div>
+
+
+<!-- User details table -->
+<div class="container-fluid" *ngIf="user">
+  <h2>Details</h2>
+        <table class="table table-stripped table-dark table-hover">
+          <thead class="thead-light">
+            <tr class="text-white">
+              <th>Email</th>
+              <th>Account Type</th>
+              <th>ID</th>
+              <th>Phone</th>
+              <th>Password</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-white">
+              <td scope="row">{{user.user.email}}</td>
+              <td>{{user.user.type}}</td>
+              <td>{{user.user._id}}</td>
+              <td>{{user.user.phone}}</td>
+              <td>{{user.user.password}}</td>
+            </tr>
+          </tbody>
+        </table>
+</div>

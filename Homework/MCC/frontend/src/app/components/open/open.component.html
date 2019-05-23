@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <form class="text-white">
+
+        <div class="form-row">
+            <div class="form-group col-sm">
+                <label for="inputEmail">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="email" name="email" id="email" placeholder="Email">
+            </div>
+            <div class="form-group col-sm">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" [(ngModel)]="password" name="password" id="password" placeholder="Password">
+            </div>
+            <div class="form-group col-sm">
+                <label for="inputPhone">Phone</label>
+                <input type="tel" class="form-control" [(ngModel)]="phone" name="phone" id="phone">
+            </div>
+            <div class="form-group col-sm">
+                <label for="type">Account Type</label>
+                    <select class="custom-select my-1 mr-sm-2" [(ngModel)]="type" name="type" id="type">
+                    <option selected value="checking">Checking</option>
+                    <option value="savings">Savings</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" (click)="open(email, password, phone, type)" class="btn btn-primary btn-lg btn-block">Create Account</button>
+    </form>
+</div>
