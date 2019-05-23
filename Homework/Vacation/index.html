@@ -30,7 +30,6 @@
         }).then(raw => {
             return raw.json();
         }).then(data => {
-            // document.getElementById('alert').style.display = "block";
             document.getElementById('content').innerHTML = JSON.stringify(data);
         }).catch(error => {
             console.log(error.description);
@@ -42,8 +41,7 @@
         fetch('http://localhost:2000/api/vacation/reset', {
             method: 'get',
         }).then(() => {
-            // document.getElementById('alert').style.display = "block";
-            document.getElementById('alert').innerHTML = "Vacation file has been deleted!";
+            document.getElementById('alert').innerHTML = "Vacation file has been emptied!";
         }).catch(error => {
             console.log(error.description);
         });
